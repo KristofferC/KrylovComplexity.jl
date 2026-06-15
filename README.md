@@ -122,7 +122,7 @@ $$O = \sigma^\alpha_{m}$$
 
 ### XXZ chain (symmetry-reduced)
 
-$$H = -\frac{J}{2} \sum_{i=1}^N \left[ \sigma^x_i \sigma^x_{i+1} + \sigma^y_i \sigma^y_{i+1} + J_{zz}(\sigma^z_i \sigma^z_{i+1} - d) \right] + c\, \sigma^z_{(N+1)/2}$$
+$$H = -\frac{J}{2} \sum_{i=1}^N [ \sigma^x_i \sigma^x_{i+1} + \sigma^y_i \sigma^y_{i+1} + J_{zz}(\sigma^z_i \sigma^z_{i+1} - d) ] + c\, \sigma^z_{(N+1)/2}$$
 
 $$O = \left(\sigma^z_{m} + \sigma^z_{N+1-m}\right) \text{ projected to symmetry sector}$$
 
@@ -207,7 +207,7 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 | `remove_degeneracies` | `true` | Collapse degenerate Liouvillian frequency blocks and drop zero-weight projection of the operator on Liouvillian eigenspace |
 | `max_iter` | $K_\text{eff} + 10$ | Maximum number of Lanczos iterations |
 | `eps_factor` | $\times 10^{-4}$ | Convergence threshold factor; stop when $b_n <$ `eps_factor` $\times \sqrt{\varepsilon_M}$ |
-| `tol_factor` | $\times 10^{-4}$ | Degeneracy tolerance factor for frequency block collapsing: $\texttt{tol\_factor} \times \sqrt{\varepsilon_M}$ |
+| `tol_factor` | $\times 10^{-4}$ | Degeneracy tolerance factor for frequency block collapsing: `tol_factor`$\times \sqrt{\varepsilon_M}$ |
 | `eps_reortho_factor` | $\times 1.0$ | PRO trigger; reorthogonalize when $\max{\|W_{mn}\|} >$ `eps_reortho_factor` $\times \sqrt{\varepsilon_M}$ |
 | `time_max` | `1000.0` | Maximum integration time for $C_K(t)$ |
 | `dt_factor` | `0.1` | Initial RK4 step $\Delta t = $`dt\_factor`$ / \max(b)$ |
