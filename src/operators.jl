@@ -394,7 +394,7 @@ end
 ## const
 const _CSYK_DEFAULTS = (
     J       = 1.0,
-    Q       = -1,       # dynmaic build to N/4
+    Q       = -1,       # dynamic build to N/2
     seed    = nothing,
     site1   = -1,  #dynamic build to N-1
     site2   = -1   #dynamic build to N
@@ -455,7 +455,7 @@ end
     csyk_operator(N; Q, site1, site2, T) -> SparseMatrix
 
 Build the cSYK initial operator in the Q-particle sector:
-  O = c^+_{site1} c_{site2}  +  c_{site1} c^+_{site2}
+  O = c^+_{site1} c_{site2}  +  c^+_{site2} c_{site1}
 Defaults: site1 = N-1, site2 = N.
 """
 function csyk_operator(N::Int; Q::Int=-1, site1::Int=-1, site2::Int=-1, T::Type=Float64)
@@ -493,9 +493,6 @@ function csyk_operator(N::Int; Q::Int=-1, site1::Int=-1, site2::Int=-1, T::Type=
     @info "cSYK operator built" N=N Q=Q dim=size(O,1)
     return O
 end
-
-# ------
-# XYZ
 
 
 # ------
@@ -570,8 +567,8 @@ function build_system(cfg::Dict)
         elseif model == "goe"
             p = _resolve_params(_RANDOM_DEFAULTS, cfg)
             rng = _build_rng(p.seed)
-            H = GOE_matrix(N, rng; sparsity=p.sparsity, T=T)
-            O = GOE_matrix(N, rng; sparsity=p.sparsity, T=T)
+            H = Complex{T}.(GOE_matrix(N, rng; sparsity=p.sparsity, T=T))
+            O = Complex{T}.(GOE_matrix(N, rng; sparsity=p.sparsity, T=T))
         elseif model == "gue"
             p = _resolve_params(_RANDOM_DEFAULTS, cfg)
             rng = _build_rng(p.seed)

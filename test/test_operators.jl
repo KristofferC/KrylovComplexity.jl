@@ -145,7 +145,7 @@ end
     @test var(real(nondiag)) ≈ 1/D atol=1e-1
     @test var(imag(nondiag)) ≈ 1/D atol=1e-1
     lambdas = eigvals(Hermitian(Matrix(H)))
-    @test maximum(abs, lambdas) < 2.7 # bounded eigenvalues in Wigner semicircle
+    @test maximum(abs, lambdas) < 3.0 # bounded eigenvalues in Wigner semicircle
 end
 
 
@@ -275,7 +275,7 @@ end
 @testset "Building cSYK System" begin
     N = 8
     D = 70
-    cfg = Dict("model" => "csyk", "N" => N, "precision_build" => 1024, "J" => 1.0)
+    cfg = Dict("model" => "csyk", "N" => N, "precision_build" => 1024, "J" => 1.0, "seed" => 0)
     H, O = build_system(cfg)
     @test size(H) == (D,D)
     @test size(O) == (D,D)

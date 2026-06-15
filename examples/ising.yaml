@@ -48,7 +48,7 @@ remove_degeneracies: true   # collapse degenerate Liouvillian frequency blocks a
 
 # ── Complexity ────────────────────────────────────────────────────────────────
 time_max:  1000.0     # maximum evolution time
-dt_factor: 0.01        # time step = dt_factor * min(1/b_max, time_max/2000)
+dt_factor: 0.01        # time step = dt_factor / max(b)
 
 # ── Output ────────────────────────────────────────────────────────────────────
 save:       true      # true → save full KCResult (b, t, K, S, metadata) to output_dir/result.jld2

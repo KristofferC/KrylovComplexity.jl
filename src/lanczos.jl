@@ -17,7 +17,6 @@ Steps:
 
 # Returns
 - `E_eff::Vector{Float64}`: effective transition frequencies
-- `H_eff::Diagonal{Float64}`: diagonal effective Hamiltonian
 - `V_eff::Vector{Float64}`: effective operator weights
 """
 # ----- C routine for faster code ------

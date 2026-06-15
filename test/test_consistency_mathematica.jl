@@ -53,7 +53,7 @@ end
 
 @testset "XYZ Chaotic N=4 — Mathematica" begin
     b_ref = parse.(Float64, split(
-        readlines(joinpath(@__DIR__, "data/chaotic_xyz_n4_p300_Jx-035_Jy05_Jz-01_hz00/b_coefficients.csv"))[1], ","))
+        readlines(joinpath(@__DIR__, "data/chaotic_xyz_n4_p300_Jx-035_Jy05_Jz-01_hz-08/b_coefficients.csv"))[1], ","))
 
     H, O = build_system(Dict("model"=>"xyz", "N"=>4,
                              "Jx"=>-0.35, "Jy"=>0.5, "Jz"=>-0.1,

@@ -3,7 +3,6 @@ module KrylovComplexity
 using LinearAlgebra
 using SparseArrays
 using Random
-using Combinatorics
 using DoubleFloats
 using GenericLinearAlgebra
 using YAML

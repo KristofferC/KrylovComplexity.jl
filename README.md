@@ -115,7 +115,7 @@ $$H = \sum_{i=1}^{N-1} J_x \sigma^x_i \sigma^x_{i+1} + J_y \sigma^y_i \sigma^y_{
 
 $$O = \sigma^\alpha_{m}$$
 
-- Where $m$ can be chosen but is by default $N/2$.
+- Where $m$ can be chosen but is by default $1$.
 - `bc`: `pbc` or `obc`
 - Integrable at $c = 0$; $c \neq 0$ breaks integrability
 - No symmetry sectors implemented
@@ -373,3 +373,6 @@ global_logger(ConsoleLogger(stderr, Logging.Info))
 - Eckseler, Pieper & Schnack (2025) — *Escaping the Krylov space during the finite-precision Lanczos algorithm*, Phys. Rev. E **112**, 025302. [DOI](http://dx.doi.org/10.1103/k94p-vls8) | [arXiv](https://arxiv.org/abs/2505.02670)
 
 - Craps, Evnin & Pascuzzi (2025) — *Multiseed Krylov Complexity*, Phys. Rev. Lett. **134**, 050402. [DOI](http://dx.doi.org/10.1103/physrevlett.134.050402) | [arXiv](http://arxiv.org/abs/2409.15666)
+
+
+This code has been written with help from [Claude Code](https://claude.ai/code).

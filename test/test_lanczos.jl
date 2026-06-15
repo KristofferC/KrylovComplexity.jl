@@ -103,4 +103,13 @@ end
     @test Kdim_int < Kdim_cha       # chaotic systems have larger Krylov dimension
 end
 
+@testset "GOE end-to-end through lanczos" begin
+    H, O = build_system(Dict("model"=>"goe", "N"=>3, "seed"=>42))
+    @test eltype(H) <: Complex   # build_system must promote GOE to complex
+    b, Kdim, _ = lanczos(H, O; precision=:f64, reortho=:fro)
+    @test b isa Vector{Float64}
+    @test all(b .> 0)
+    @test Kdim > 1
+end
+
 end  # Lanczos
