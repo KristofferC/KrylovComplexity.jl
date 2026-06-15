@@ -202,7 +202,7 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 | `reortho` | `"pro"` | Reorthogonalization method: `none`, `fro`, `dro`, `pro`, `dpro` |
 | `remove_degeneracies` | `true` | Collapse degenerate Liouvillian frequency blocks and drop zero-weight projection of the operator on Liouvillian eigenspace |
 | `max_iter` | $K_\text{eff} + 10$ | Maximum number of Lanczos iterations |
-| `eps_factor` | $\times 10^{-4}$ | Convergence threshold factor; stop when $b_n < \texttt{eps\_factor} \times \sqrt{\varepsilon_M}$ |
+| `eps_factor` | $\times 10^{-4}$ | Convergence threshold factor; stop when $b_n <$ eps\_factor $\times \sqrt{\varepsilon_M}$ |
 | `tol_factor` | $\times 10^{-4}$ | Degeneracy tolerance factor for frequency block collapsing: $\texttt{tol\_factor} \times \sqrt{\varepsilon_M}$ |
 | `eps_reortho_factor` | $\times 1.0$ | PRO trigger; reorthogonalize when $\max{\|W_{mn}\|} >$ eps\_reortho\_factor $\times \sqrt{\varepsilon_M}$ |
 | `time_max` | `1000.0` | Maximum integration time for $C_K(t)$ |
