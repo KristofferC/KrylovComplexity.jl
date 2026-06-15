@@ -131,7 +131,7 @@ Symmetries removed before Lanczos:
 - **Total Magnetization symmetry**: projection to total-$S^z$ sector with $M$ spin-up sites (default $M = N/2$)
 - **Parity Symmetry**: projection to parity sector $p = \pm 1$ (default $p=+1$)
 
-The operator is the symmetrised two-site combination and is made traceless, following [arXiv:2207.07701].
+The operator is the symmetrized two-site combination and is made traceless, following [arXiv:2207.07701].
 
 ### GOE / GUE random matrices
 Gaussian Orthogonal and Unitary Ensemble matrices are well-studied objects in Random Matrix Theory.
@@ -141,8 +141,8 @@ where $A_{ij} \sim \mathcal{N}(0,1)$. $O$ follows the same distribution.
 
 GUE: Hermitian matrices: 
 $$H_{ii} \sim \mathcal{N}(0,1)$$
-$$\operatorname{Re}(H_{ij}) \sim \mathcal{N}(0,1/2)$$
-$$\operatorname{Im}(H_{ij}) \sim \mathcal{N}(0,1/2)$$
+$$Re(H_{ij}) \sim \mathcal{N}(0,1/2)$$
+$$Im(H_{ij}) \sim \mathcal{N}(0,1/2)$$
 
 where $i\neq j$. $O$ follows the same distribution.
 
@@ -170,7 +170,7 @@ $$J_{ij;kl} = - J_{ji;kl} = - J_{ij;lk} = J^*_{kl;ij}$$
 | `double` | Double64 | 31 | default for production runs |
 | integer (e.g. `256`) | BigFloat | $\approx p / 3.32$ | high-precision validation |
 
-`precision_build` controls the type used to build $H$ and $O$ (including diagonalisation). Default on `f64`, to ensure reproducibility of the results between different runs.
+`precision_build` controls the type used to build $H$ and $O$ (including diagonalization). Default on `f64`, to ensure reproducibility of the results between different runs.
 `precision` controls the working precision of the Lanczos algorithm.
 
 ## Reorthogonalization
@@ -212,7 +212,7 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 | `save` | `false` | Save full `KCResult` (b, t, K, S, metadata) to `output_dir/result.jld2` |
 | `save_b` | `false` | Save only $b$ to `output_dir/b.jld2` (ignored when `save: true`) |
 
-### Ising-specific parameters
+### Ising specific parameters
 
 | Key | Default | Description |
 |---|---|---|
@@ -223,7 +223,7 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 | `oper` | `"Sz"` | Initial operator: `Sx`, `Sy`, `Sz` |
 | `oper_site` | `1` | Site index of the initial operator (1-based) |
 
-### XYZ-specific parameters
+### XYZ specific parameters
 
 | Key | Default | Description |
 |---|---|---|
@@ -236,7 +236,7 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 | `oper` | `"Sz"` | Initial operator: `Sx`, `Sy`, `Sz` |
 | `oper_site` | `1` | Site index of the initial operator (1-based) |
 
-### XXZ-specific parameters
+### XXZ specific parameters
 
 | Key | Default | Description |
 |---|---|---|
@@ -249,14 +249,14 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 | `oper_site` | `-1` | Operator site index; `-1` uses $N/2$ |
 | `bc` | `"obc"` | Boundary conditions: `pbc` or `obc` |
 
-### GOE / GUE-specific parameters
+### GOE / GUE specific parameters
 
 | Key | Default | Description |
 |---|---|---|
 | `seed` | `null` | RNG seed; `null` for a random draw each run |
 | `sparsity` | `1.0` | Fraction of nonzero entries (1.0 = dense) |
 
-### cSYK-specific parameters
+### cSYK specific parameters
 
 | Key | Default | Description |
 |---|---|---|
