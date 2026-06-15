@@ -122,7 +122,7 @@ $$O = \sigma^\alpha_{m}$$
 
 ### XXZ chain (symmetry-reduced)
 
-$$H = -\frac{J}{2} \sum_{\langle i,j \rangle} \left[ \sigma^x_i \sigma^x_j + \sigma^y_i \sigma^y_j + J_{zz}\!\left(\sigma^z_i \sigma^z_j - d\right) \right] + c\, \sigma^z_{(N+1)/2}$$
+$$H = -\frac{J}{2} \sum_{i=1}^N \left[ \sigma^x_i \sigma^x_{i+1} + \sigma^y_i \sigma^y_{i+1} + J_{zz}(\sigma^z_i \sigma^z_{i+1} - d) \right] + c\, \sigma^z_{(N+1)/2}$$
 
 $$O = \left(\sigma^z_{m} + \sigma^z_{N+1-m}\right) \text{ projected to symmetry sector}$$
 
@@ -136,12 +136,16 @@ The operator is the symmetrized two-site combination and is made traceless, foll
 ### GOE / GUE random matrices
 Gaussian Orthogonal and Unitary Ensemble matrices are well-studied objects in Random Matrix Theory.
 GOE: Symmetric matrices: 
+
 $$H = (A^T + A)/2$$
+
 where $A_{ij} \sim \mathcal{N}(0,1)$. $O$ follows the same distribution.
 
 GUE: Hermitian matrices: 
 $$H_{ii} \sim \mathcal{N}(0,1)$$
+
 $$Re(H_{ij}) \sim \mathcal{N}(0,1/2)$$
+
 $$Im(H_{ij}) \sim \mathcal{N}(0,1/2)$$
 
 where $i\neq j$. $O$ follows the same distribution.
@@ -202,11 +206,11 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 | `reortho` | `"pro"` | Reorthogonalization method: `none`, `fro`, `dro`, `pro`, `dpro` |
 | `remove_degeneracies` | `true` | Collapse degenerate Liouvillian frequency blocks and drop zero-weight projection of the operator on Liouvillian eigenspace |
 | `max_iter` | $K_\text{eff} + 10$ | Maximum number of Lanczos iterations |
-| `eps_factor` | $\times 10^{-4}$ | Convergence threshold factor; stop when $b_n <$ eps\_factor $\times \sqrt{\varepsilon_M}$ |
+| `eps_factor` | $\times 10^{-4}$ | Convergence threshold factor; stop when $b_n <$ `eps_factor` $\times \sqrt{\varepsilon_M}$ |
 | `tol_factor` | $\times 10^{-4}$ | Degeneracy tolerance factor for frequency block collapsing: $\texttt{tol\_factor} \times \sqrt{\varepsilon_M}$ |
-| `eps_reortho_factor` | $\times 1.0$ | PRO trigger; reorthogonalize when $\max{\|W_{mn}\|} >$ eps\_reortho\_factor $\times \sqrt{\varepsilon_M}$ |
+| `eps_reortho_factor` | $\times 1.0$ | PRO trigger; reorthogonalize when $\max{\|W_{mn}\|} >$ `eps_reortho_factor` $\times \sqrt{\varepsilon_M}$ |
 | `time_max` | `1000.0` | Maximum integration time for $C_K(t)$ |
-| `dt_factor` | `0.1` | Initial RK4 step $\Delta t = \texttt{dt\_factor} / \max(b)$ |
+| `dt_factor` | `0.1` | Initial RK4 step $\Delta t = $`dt\_factor`$ / \max(b)$ |
 | `kc_out_resolution` | `2000` | Number of output time points in $C_K(t)$ and $S_K(t)$ |
 | `output_dir` | `"results/"` | Directory for output files |
 | `save` | `false` | Save full `KCResult` (b, t, K, S, metadata) to `output_dir/result.jld2` |
@@ -272,13 +276,13 @@ All parameters can be set in a YAML file or passed as keys in a `Dict` to `simul
 
 ```
 src/
-  KrylovComplexity.jl   module entry point, exports
-  types.jl              KCResult struct
-  operators.jl          build_system and all Hamiltonian/operator constructors
-  lanczos.jl            Lanczos algorithm, reorthogonalization, eigenbasis build
-  complexity.jl         RK4 integration of chain Schrödinger equation
-  config.jl             YAML/Dict parsing, simulate() wrapper
-  io.jl                 save/load KCResult and b-coefficients (JLD2)
+  KrylovComplexity.jl                         module entry point, exports
+  types.jl                                    KCResult struct
+  operators.jl                                build_system and all Hamiltonian/operator constructors
+  lanczos.jl                                  Lanczos algorithm, reorthogonalization, eigenbasis build
+  complexity.jl                               RK4 integration of chain Schrödinger equation
+  config.jl                                   YAML/Dict parsing, simulate() wrapper
+  io.jl                                       save/load KCResult and b-coefficients (JLD2)
 
 examples/
   ising.yaml                                  Ising chain example config
@@ -299,7 +303,7 @@ test/
   test_consistency_mathematica.jl
   test_consistency_xxz.jl
   test_consistency_csyk.jl
-  data/                 reference b-coefficient files for consistency tests
+  data/                                       reference b-coefficient files for consistency tests
 ```
 
 ---
