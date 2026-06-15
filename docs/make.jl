@@ -18,6 +18,6 @@ makedocs(
 )
 
 deploydocs(
-    repo      = "github.com/shanoether/KrylovComplexity.jl.git",
+    repo = "github.com/shanoether/KrylovComplexity.jl",
     devbranch = "main",
 )
