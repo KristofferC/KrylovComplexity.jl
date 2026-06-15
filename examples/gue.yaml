@@ -1,0 +1,53 @@
+# GUE (Gaussian Unitary Ensemble) random matrix
+#
+# Both H and O are independently drawn GUE matrices.
+# GUE is maximally chaotic — use as a benchmark for the linear ramp in b_n.
+#
+# Launch from Julia REPL (activate the package environment first):
+#   using KrylovComplexity
+#   result = simulate("examples/gue.yaml")
+#
+# Or from the command line:
+#   julia --project=KrylovComplexity.jl -e 'using KrylovComplexity; simulate("examples/gue.yaml")'
+
+# ── Model ─────────────────────────────────────────────────────────────────────
+model: gue            # fixed; use goe for real symmetric random matrices
+N: 6                  # Hilbert space dim = 2^N; GUE is dense so N<=7 is practical at f64
+
+seed:     42          # RNG seed for reproducibility; omit or set to null for random
+sparsity: 1.0         # fraction of off-diagonal entries kept (1.0 = dense, 0.5 = 50% sparse)
+                      # sparsity < 1 reduces cost but changes the ensemble
+
+# ── Build precision ───────────────────────────────────────────────────────────
+precision_build: 1024 # bits used to build H and O before Lanczos
+                      # options: f64 (53 bits) | double (106) | bigfloat (256) | any integer
+
+# ── Lanczos ───────────────────────────────────────────────────────────────────
+precision: double     # working precision for Lanczos
+                      # options: f64 | double | bigfloat | any integer (BigFloat bits)
+
+reortho: pro          # reorthogonalization method
+                      # options: none | fro (full single-pass) | dro (double-pass) | pro (adaptive partial)
+
+remove_degeneracies: true   # collapse degenerate Liouvillian frequency blocks and discard zero-weight
+                            # GUE has no exact degeneracies so this mainly removes zero-weight transitions
+
+# max_iter: omit to use default (K_eff + 10)
+# eps_factor: convergence threshold = eps_factor * eps(T); default: sqrt(eps)*1e-4
+# tol_factor: degeneracy tolerance = tol_factor * eps(T); default: sqrt(eps)*1e-4
+#
+# PRO reorthogonalization trigger — uncomment to override:
+# eps_reortho_factor: 1.0   # trigger when max|W| > eps_reortho_factor × sqrt(eps(T))
+#                            # default (1.0): fires at sqrt(machine epsilon)
+#                            #   ≈ 1.49e-8  for f64
+#                            #   ≈ 2.35e-16 for double
+#                            #   much smaller for bigfloat
+
+# ── Complexity ────────────────────────────────────────────────────────────────
+time_max:  1000.0
+dt_factor: 0.01
+
+# ── Output ────────────────────────────────────────────────────────────────────
+save:       true      # true → save full KCResult (b, t, K, S, metadata) to output_dir/result.jld2
+save_b:     false      # true → save only b coefficients to output_dir/b.jld2 (ignored if save: true)
+output_dir: results/

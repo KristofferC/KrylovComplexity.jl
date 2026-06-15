@@ -1,0 +1,9 @@
+Manifest.toml
+results/
+*.png
+*.jld2
+!test/data/*.jld2
+.DS_Store
+.venv
+.env
+*secret*

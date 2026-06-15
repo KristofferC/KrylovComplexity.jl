@@ -1,0 +1,6 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+KrylovComplexity = "b35daade-376e-4ea7-997e-f4120022cb4b"
+
+[compat]
+Documenter = "1"

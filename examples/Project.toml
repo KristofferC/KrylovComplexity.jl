@@ -1,0 +1,7 @@
+[deps]
+CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
+KrylovComplexity = "b35daade-376e-4ea7-997e-f4120022cb4b"
+
+[compat]
+CairoMakie = "0.15"
+KrylovComplexity = "0.1"

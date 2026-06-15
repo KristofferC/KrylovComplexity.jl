@@ -1,0 +1,59 @@
+# XYZ spin chain (anisotropic Heisenberg)
+#
+# Launch from Julia REPL (activate the package environment first):
+#   using KrylovComplexity
+#   result = simulate("examples/xyz.yaml")
+#
+# Or from the command line:
+#   julia --project=KrylovComplexity.jl -e 'using KrylovComplexity; simulate("examples/xyz.yaml")'
+
+# ── Model ─────────────────────────────────────────────────────────────────────
+model: xyz            # fixed
+N: 6                  # number of spins; Hilbert space dim = 2^N
+
+# H = Jx Σ σ^x_i σ^x_{i+1}  +  Jy Σ σ^y_i σ^y_{i+1}  +  Jz Σ σ^z_i σ^z_{i+1}
+#   + hz Σ σ^z_i  +  c σ^z_{N/2}
+Jx: 1.0               # x-coupling
+Jy: 1.0               # y-coupling
+Jz: 1.0               # z-coupling; Jx=Jy=Jz → Heisenberg (integrable)
+hz: 0.0               # uniform longitudinal field
+c:  0.5               # single-site symmetry-breaking field at site N/2; non-zero → chaotic
+
+bc: pbc               # boundary conditions: pbc (periodic) | obc (open)
+
+oper:      Sz         # initial operator: Sz | Sx | Sy
+oper_site: 1          # site index (1-based)
+
+# ── Build precision ───────────────────────────────────────────────────────────
+precision_build: 1024 # bits used to build H and O before Lanczos
+                      # options: f64 (53 bits) | double (106) | bigfloat (256) | any integer
+
+# ── Lanczos ───────────────────────────────────────────────────────────────────
+precision: double     # working precision for Lanczos
+                      # options: f64 | double | bigfloat | any integer (BigFloat bits)
+
+reortho: pro          # reorthogonalization method
+                      # options: none | fro (full single-pass) | dro (double-pass) | pro (adaptive partial)
+
+remove_degeneracies: true   # collapse degenerate Liouvillian frequency blocks and discard zero-weight
+                            # false → keep all individual (m,n) transitions (larger K_eff, slower)
+
+# max_iter: omit to use default (K_eff + 10)
+# eps_factor: convergence threshold = eps_factor * eps(T); default: sqrt(eps)*1e-4
+# tol_factor: degeneracy tolerance = tol_factor * eps(T); default: sqrt(eps)*1e-4
+#
+# PRO reorthogonalization trigger — uncomment to override:
+# eps_reortho_factor: 1.0   # trigger when max|W| > eps_reortho_factor × sqrt(eps(T))
+#                            # default (1.0): fires at sqrt(machine epsilon)
+#                            #   ≈ 1.49e-8  for f64
+#                            #   ≈ 2.35e-16 for double
+#                            #   much smaller for bigfloat
+
+# ── Complexity ────────────────────────────────────────────────────────────────
+time_max:  1000.0
+dt_factor: 0.01
+
+# ── Output ────────────────────────────────────────────────────────────────────
+save:       true      # true → save full KCResult (b, t, K, S, metadata) to output_dir/result.jld2
+save_b:     false      # true → save only b coefficients to output_dir/b.jld2 (ignored if save: true)
+output_dir: results/
